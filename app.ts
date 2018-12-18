@@ -9,6 +9,8 @@ class App{
     public app: express.Application;
     public route: Routes = new Routes();
     public mongoUrl="mongodb://logan2020:vijay2020@ds251727.mlab.com:51727/mpoc";
+    // public mongoUrl="mongodb://localhost:27017/mpoc";
+
 
     constructor(){
         this.app=express();

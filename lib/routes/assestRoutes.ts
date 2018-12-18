@@ -21,5 +21,12 @@ export class Routes{
 
         // To post a Record to server
         .post(this.assestController.addNewRecord)
+        
+        app.route('/assest/edit')
+        .put(this.assestController.updateSystemNumberForRecord)
+
+        // to retrive single record
+        app.route('/assest/:id')
+        .get(this.assestController.retriveSingleRecord)
     }
 }
