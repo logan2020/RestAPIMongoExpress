@@ -63,4 +63,19 @@ export class AssestController{
             }
         })
     }
+
+    deleteSingleRecord(req: Request, res: Response){
+        Assest.deleteOne({_id: req.body._id},(err) => {
+            if(err){
+                res.status(500).send({
+                    message: "there was a problem to delete your request"
+                })
+            }
+            else{
+                res.status(200).send({
+                    message: "record deleted aairuchu"
+                });
+            }
+        })
+    }
 }

@@ -12,7 +12,6 @@ export class Routes{
             res.status(200).send({
                 message:"Get request successfull"
             });
-            // this.assestController.retriveRecords
         })
 
         // To retrive all assest records
@@ -21,6 +20,9 @@ export class Routes{
 
         // To post a Record to server
         .post(this.assestController.addNewRecord)
+
+        // To delete a Record from server
+        .delete(this.assestController.deleteSingleRecord)
         
         app.route('/assest/edit')
         .put(this.assestController.updateSystemNumberForRecord)
