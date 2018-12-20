@@ -10,5 +10,9 @@ export class UserRoutes{
         app.route('/addUser')
         // To register the user
         .post(this.userController.addUser)
+
+        app.route('/signIn')
+        // to login and get jwt token
+        .post(this.userController.signIn)
     }
 }

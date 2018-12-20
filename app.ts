@@ -2,9 +2,13 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as mongoose from "mongoose";
 import * as logger from 'morgan';
+import * as jwt from 'jsonwebtoken';
+import * as cors from 'cors';
 
 import { Routes } from './lib/routes/assestRoutes'
 import { UserRoutes } from "./lib/routes/userRoutes";
+
+const secretKey = 'hashValue';
 
 class App{
 
@@ -31,6 +35,20 @@ class App{
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: true}));
         this.app.use(logger('dev'));
+        this.app.use(cors());
+        this.app.set('secret',secretKey);
+
+        this.app.use('/assest',(req,res,next)=>{
+            jwt.verify(req.headers['x-access-token'], req.app.get('secret'), function(err, decoded) {
+                if (err) {
+                  res.status(401).send({status:"token not found", message: err.message, data:null});
+                }else{
+                  // add user's mongo id to request
+                  req.body.userId = decoded.id;
+                  next();
+                }
+              });
+        })
     }
 
     private mongoSetup(){
